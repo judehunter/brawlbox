@@ -3,20 +3,17 @@ using System;
 
 public class Player : KinematicBody2D
 {
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-	}
+	[Export]
+	readonly float moveSpeed;
 
-// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(float delta)
+	public override void _PhysicsProcess(float delta)
 	{
-		var move = new Vector2();
-		if (Input.IsActionPressed("ui_right")) move.x += 1;
-		if (Input.IsActionPressed("ui_left")) move.x -= 1;
-		if (Input.IsActionPressed("ui_up")) move.y -= 1;
-		if (Input.IsActionPressed("ui_down")) move.y += 1;
+		var move = new Vector2
+		{
+			x = Input.GetActionStrength("move_right") - Input.GetActionStrength("move_left"),
+			y = Input.GetActionStrength("move_down") - Input.GetActionStrength("move_up")
+		};
 
-		Position += move.Normalized();
+		Position += move.Normalized() * delta * moveSpeed;
 	}
 }
