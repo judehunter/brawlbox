@@ -20,11 +20,13 @@ public class Player : KinematicBody2D
 		velocity.x = (Input.GetActionStrength("move_right") - Input.GetActionStrength("move_left")) * moveSpeed;
 		if (velocity.y == 0)
 		{
-			if (Input.IsActionPressed("move_up"))
+			if (IsOnFloor() && Input.IsActionPressed("move_up"))
 			{
 				isJump = true;
 				velocity.y = -1 * jumpStrength;
 			}
+
+			else isJump = false;
 		}
 		if (Input.IsActionJustReleased("move_up") || velocity.y > 0)
 		{
