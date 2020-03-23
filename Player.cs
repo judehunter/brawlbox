@@ -7,9 +7,13 @@ public class Player : KinematicBody2D
 	[Export] readonly float jumpStrength;
 	[Export] readonly float gravityStrength = 1;
 	[Export] readonly float gravityFallStrength = 2;
+	[Export] readonly float knockbackDampening = 2;
+	[Export] readonly float knockbackThreshold = .2f;
 
 	bool isJump = false;
 	Vector2 velocity;
+
+	Vector2 knockback;
 
 	void GetInput()
 	{
@@ -32,12 +36,30 @@ public class Player : KinematicBody2D
 	{
 		velocity.y += 9.8f * (isJump ? gravityStrength : gravityFallStrength);
 	}
+
+	public void Knockback(float strength, Vector2 dist)
+	{
+		knockback += strength * dist.Normalized();
+	}
+
+	public void ApplyKnockback()
+	{
+		velocity += knockback;
+
+		knockback /= knockbackDampening;
+
+		if (knockback.Length() < knockbackThreshold)
+		{
+			knockback = Vector2.Zero;
+		}
+	}
 		
 
 	public override void _PhysicsProcess(float delta)
 	{
 		GetInput();
 		ApplyGravity();
+		ApplyKnockback();
 		velocity = MoveAndSlide(velocity, Vector2.Up);
 	}
 }
