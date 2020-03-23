@@ -1,0 +1,127 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://scenes/Menus/Assets/Logo.png" type="Texture" id=1]
+[ext_resource path="res://scenes/Menus/Assets/1FvYEp.png" type="Texture" id=2]
+[ext_resource path="res://scenes/Menus/Assets/Multiplayer.png" type="Texture" id=3]
+[ext_resource path="res://scenes/Menus/Assets/Singleplayer.png" type="Texture" id=4]
+[ext_resource path="res://scenes/Menus/MainMenu.cs" type="Script" id=5]
+[ext_resource path="res://scenes/Menus/Assets/bg.ogg" type="AudioStream" id=6]
+[ext_resource path="res://scenes/Menus/ServerList.cs" type="Script" id=7]
+[ext_resource path="res://Gilroy.tres" type="DynamicFont" id=8]
+[ext_resource path="res://scenes/Menus/Assets/HostGame.png" type="Texture" id=9]
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0, 0, 0, 0.47451 )
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainMenu" type="MarginContainer" parent="."]
+margin_right = 640.0
+margin_bottom = 362.0
+custom_constants/margin_right = 15
+custom_constants/margin_top = 15
+custom_constants/margin_left = 15
+custom_constants/margin_bottom = 15
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu"]
+margin_left = 15.0
+margin_top = 15.0
+margin_right = 625.0
+margin_bottom = 347.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Logo" type="TextureRect" parent="MainMenu/VBoxContainer"]
+margin_right = 610.0
+margin_bottom = 50.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMenu/VBoxContainer"]
+margin_top = 54.0
+margin_right = 610.0
+margin_bottom = 332.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Buttons" type="VBoxContainer" parent="MainMenu/VBoxContainer/HBoxContainer"]
+margin_right = 100.0
+margin_bottom = 278.0
+size_flags_horizontal = 0
+size_flags_vertical = 3
+alignment = 2
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Solo" type="TextureButton" parent="MainMenu/VBoxContainer/HBoxContainer/Buttons"]
+margin_top = 210.0
+margin_right = 100.0
+margin_bottom = 242.0
+texture_normal = ExtResource( 4 )
+
+[node name="Duo" type="TextureButton" parent="MainMenu/VBoxContainer/HBoxContainer/Buttons"]
+margin_top = 246.0
+margin_right = 100.0
+margin_bottom = 278.0
+texture_normal = ExtResource( 3 )
+
+[node name="Multiplayer" type="VBoxContainer" parent="MainMenu/VBoxContainer/HBoxContainer"]
+margin_left = 104.0
+margin_right = 610.0
+margin_bottom = 278.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMenu/VBoxContainer/HBoxContainer/Multiplayer"]
+margin_right = 506.0
+margin_bottom = 32.0
+alignment = 2
+
+[node name="TextureButton" type="TextureButton" parent="MainMenu/VBoxContainer/HBoxContainer/Multiplayer/HBoxContainer"]
+margin_left = 406.0
+margin_right = 506.0
+margin_bottom = 32.0
+texture_normal = ExtResource( 9 )
+
+[node name="ServerList" type="ItemList" parent="MainMenu/VBoxContainer/HBoxContainer/Multiplayer"]
+margin_top = 36.0
+margin_right = 506.0
+margin_bottom = 278.0
+rect_min_size = Vector2( 120, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/bg = SubResource( 3 )
+custom_fonts/font = ExtResource( 8 )
+auto_height = true
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BG" type="Sprite" parent="MainMenu"]
+position = Vector2( 321.075, 185.126 )
+scale = Vector2( 0.399062, 0.392135 )
+z_index = -2
+texture = ExtResource( 2 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+autoplay = true
+[connection signal="pressed" from="MainMenu/VBoxContainer/HBoxContainer/Buttons/Solo" to="MainMenu/VBoxContainer/HBoxContainer/Buttons" method="_on_Solo_pressed"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/HBoxContainer/Buttons/Duo" to="MainMenu/VBoxContainer/HBoxContainer/Multiplayer/ServerList" method="_on_Duo_pressed"]

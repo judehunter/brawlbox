@@ -17,4 +17,3 @@ public class FpsCounter : CanvasLayer
 		label.Text = "FPS: " + Engine.GetFramesPerSecond();
 	}
 }
-0
