@@ -208,11 +208,6 @@ tile_set = SubResource( 2 )
 cell_size = Vector2( 16, 16 )
 collision_use_kinematic = true
 format = 1
-tile_data = PoolIntArray( 262150, 11, 786434, 262151, 11, 786434, 327687, 11, 786434, 327688, 11, 786434, 327689, 11, 786434, 327690, 11, 786434, 393223, 3, 0, 393227, 3, 0, 458759, 3, 0, 458760, 3, 1, 458761, 3, 1, 458762, 3, 1, 458763, 3, 0, 589830, 3, 0, 589831, 3, 0, 589832, 3, 0, 589833, 3, 0, 589834, 3, 0, 589835, 3, 0, 589836, 3, 0, 589837, 3, 0 )
 __meta__ = {
 "_edit_lock_": true
 }
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
