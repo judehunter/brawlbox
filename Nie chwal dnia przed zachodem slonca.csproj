@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="scripts\Camera.cs" />
     <Compile Include="scripts\MovingPlatform.cs" />
     <Compile Include="scripts\Player.cs" />
   </ItemGroup>

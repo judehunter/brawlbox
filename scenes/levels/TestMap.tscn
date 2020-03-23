@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/TileMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/Green Moving Platform.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/Blue Moving Platform.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scripts/Camera.cs" type="Script" id=5]
 
 [node name="Node2D" type="Node2D"]
 __meta__ = {
@@ -31,3 +32,10 @@ position = Vector2( 357.775, 120.017 )
 pointA = Vector2( 340, 120 )
 pointB = Vector2( 510, 120 )
 speed = 60.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+current = true
+script = ExtResource( 5 )
+shakeDamping = 20.0
+shakeThreshold = 0.2

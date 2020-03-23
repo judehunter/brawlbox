@@ -7,7 +7,7 @@ public class Player : KinematicBody2D
 	[Export] readonly float jumpStrength;
 	[Export] readonly float gravityStrength = 1;
 	[Export] readonly float gravityFallStrength = 2;
-	[Export] readonly float knockbackDampening = 2;
+	[Export] readonly float knockbackDamping = 1.2f;
 	[Export] readonly float knockbackThreshold = .2f;
 
 	bool isJump = false;
@@ -46,7 +46,7 @@ public class Player : KinematicBody2D
 	{
 		velocity += knockback;
 
-		knockback /= knockbackDampening;
+		knockback /= knockbackDamping;
 
 		if (knockback.Length() < knockbackThreshold)
 		{
