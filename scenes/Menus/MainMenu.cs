@@ -42,7 +42,8 @@ public class MainMenu : MarginContainer
 	private void _on_Credits_pressed()
 	{
 
-		GetNode<PopupDialog>("CenterContainer/PopupDialog").PopupCentered();
+		PopupDialog p = GetNode<PopupDialog>("Credits/PopupDialog");
+		if(!p.Visible) p.PopupCentered();
 		select.Play();
 	}
 
