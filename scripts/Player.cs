@@ -15,6 +15,8 @@ public class Player : KinematicBody2D
 
 	Vector2 knockback;
 
+	LevelManager lvlMgr;
+
 	void GetInput()
 	{
 		velocity.x = (Input.GetActionStrength("move_right") - Input.GetActionStrength("move_left")) * moveSpeed;
@@ -55,7 +57,12 @@ public class Player : KinematicBody2D
 			knockback = Vector2.Zero;
 		}
 	}
-		
+
+	public override void _Ready()
+	{
+		Enemy.AddPlayer(this);
+		lvlMgr = GetTree().Root.GetNode<LevelManager>("Level");
+	}
 
 	public override void _PhysicsProcess(float delta)
 	{
@@ -63,5 +70,6 @@ public class Player : KinematicBody2D
 		ApplyGravity();
 		ApplyKnockback();
 		velocity = MoveAndSlide(velocity, Vector2.Up);
+		lvlMgr.WrapAroundBoundary(this);
 	}
 }
