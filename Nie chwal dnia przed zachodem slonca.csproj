@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="scenes\Menus\BackgroundParallax.cs" />
     <Compile Include="scenes\Menus\MainMenu.cs" />
     <Compile Include="utils\FpsCounter.cs" />
   </ItemGroup>

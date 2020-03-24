@@ -4,10 +4,11 @@ using System;
 public class MainMenu : MarginContainer
 {
 	AudioStreamPlayer select;
+	bool multiplayerVisible = false;
 
 	public override void _Ready()
 	{
-		GetNode<HBoxContainer>("VBoxContainer/UI/Right/Multiplayer").Visible = false;
+		GetNode<HBoxContainer>("VBoxContainer/UI/MarginContainer/Right/Multiplayer").Visible = multiplayerVisible;
 		select = GetNode<AudioStreamPlayer>("SelectSounds");
 	}
 
@@ -19,7 +20,8 @@ public class MainMenu : MarginContainer
 
 	private void _on_Duo_pressed()
 	{
-		GetNode<HBoxContainer>("VBoxContainer/UI/Right/Multiplayer").Visible = true;
+		multiplayerVisible = !multiplayerVisible;
+		GetNode<HBoxContainer>("VBoxContainer/UI/MarginContainer/Right/Multiplayer").Visible = multiplayerVisible;
 		select.Play();
 	}
 
@@ -37,7 +39,11 @@ public class MainMenu : MarginContainer
 		}
 	}
 
+	private void _on_Credits_pressed()
+	{
+
+		GetNode<PopupDialog>("CenterContainer/PopupDialog").PopupCentered();
+		select.Play();
+	}
+
 }
-
-
-
