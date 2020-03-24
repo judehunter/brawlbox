@@ -55,8 +55,45 @@ shakeDamping = 20.0
 shakeThreshold = 0.2
 
 [node name="Enemy Melee" parent="." instance=ExtResource( 6 )]
-position = Vector2( 10.8802, 37.5201 )
+position = Vector2( 20.5498, 56.2903 )
+moveSpeed = 100.0
+
+[node name="Enemy Melee9" parent="." instance=ExtResource( 6 )]
+position = Vector2( 592.189, 151.279 )
+moveSpeed = 100.0
+
+[node name="Enemy Melee2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 549.53, 48.3272 )
+moveSpeed = 100.0
+
+[node name="Enemy Melee3" parent="." instance=ExtResource( 6 )]
+position = Vector2( 485.824, 44.9144 )
+moveSpeed = 100.0
+
+[node name="Enemy Melee4" parent="." instance=ExtResource( 6 )]
+position = Vector2( 415.863, 40.9328 )
+moveSpeed = 100.0
+
+[node name="Enemy Melee5" parent="." instance=ExtResource( 6 )]
+position = Vector2( 364.671, 37.52 )
+moveSpeed = 100.0
+
+[node name="Enemy Melee6" parent="." instance=ExtResource( 6 )]
+position = Vector2( 307.223, 31.8321 )
+moveSpeed = 100.0
+
+[node name="Enemy Melee7" parent="." instance=ExtResource( 6 )]
+position = Vector2( 144.547, 34.1073 )
+moveSpeed = 100.0
+
+[node name="Enemy Melee8" parent="." instance=ExtResource( 6 )]
+position = Vector2( 90.5116, 40.9328 )
+moveSpeed = 100.0
 
 [node name="Gizmo" type="Sprite" parent="."]
+scale = Vector2( 0.640001, 0.640001 )
+texture = ExtResource( 7 )
+
+[node name="Gizmo2" type="Sprite" parent="."]
 scale = Vector2( 0.640001, 0.640001 )
 texture = ExtResource( 7 )

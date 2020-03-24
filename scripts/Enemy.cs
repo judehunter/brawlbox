@@ -9,6 +9,8 @@ public class Enemy : KinematicBody2D
 
     protected Player nearest;
 
+    protected LevelManager lvlMgr;
+
     protected void UpdateNearest()
     {
         float minDist = float.MaxValue;
@@ -27,7 +29,7 @@ public class Enemy : KinematicBody2D
 
     public override void _Ready()
     {
-       // players.AddRange(GetTree().GetNodesInGroup("players").Cast<Player>());
+        lvlMgr = GetTree().Root.GetNode<LevelManager>("Level");
     }
 
     static public void AddPlayer(Player player)

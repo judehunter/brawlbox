@@ -7,6 +7,7 @@ public class Player : KinematicBody2D
 	[Export] readonly float jumpStrength;
 	[Export] readonly float gravityStrength = 1;
 	[Export] readonly float gravityFallStrength = 2;
+	[Export] readonly int maxSpeed;
 	[Export] readonly float knockbackDamping = 1.2f;
 	[Export] readonly float knockbackThreshold = .2f;
 
@@ -39,6 +40,7 @@ public class Player : KinematicBody2D
 	void ApplyGravity()
 	{
 		velocity.y += 9.8f * (isJump ? gravityStrength : gravityFallStrength);
+		if (velocity.y > maxSpeed) velocity.y = maxSpeed;
 	}
 
 	public void Knockback(float strength, Vector2 dist)

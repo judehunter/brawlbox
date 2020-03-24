@@ -13,6 +13,7 @@ moveSpeed = 120.0
 jumpStrength = 300.0
 gravityStrength = 1.2
 gravityFallStrength = 2.2
+maxSpeed = 700
 knockbackThreshold = 0.1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
