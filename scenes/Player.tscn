@@ -6,15 +6,17 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" groups=[
+"knockbackable",
+]]
 scale = Vector2( 1.73909, 1.73909 )
 script = ExtResource( 2 )
+gravityStrength = 1.2
+knockbackThreshold = 0.1
+maxSpeed = 700
 moveSpeed = 120.0
 jumpStrength = 300.0
-gravityStrength = 1.2
 gravityFallStrength = 2.2
-maxSpeed = 700
-knockbackThreshold = 0.1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

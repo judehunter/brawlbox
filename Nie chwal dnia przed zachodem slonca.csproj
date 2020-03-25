@@ -57,6 +57,7 @@
     <Compile Include="scripts\Camera.cs" />
     <Compile Include="scripts\Enemy.cs" />
     <Compile Include="scripts\EnemyMelee.cs" />
+    <Compile Include="scripts\Entity.cs" />
     <Compile Include="scripts\MovingPlatform.cs" />
     <Compile Include="scripts\Player.cs" />
     <Compile Include="scripts\LevelManager.cs" />
