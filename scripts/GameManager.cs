@@ -51,6 +51,6 @@ public class GameManager : Node2D
 		AddChild(Level.Instance());
 		GetNode<ColorRect>("CRTShader/BlackOverlay").Visible = false;
 		await Task.Delay(TimeSpan.FromSeconds(1));
-		GetNode<LevelManager>("Level").NextWave();
+		GetNode<LevelManager>("Level").FirstWave();
 	}
 }

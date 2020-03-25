@@ -62,6 +62,19 @@ public class LevelManager : Node2D
 
 	int GenEnemyCount() => difficulty * (int)Math.Ceiling((Math.Log(curWave + 1) / Math.Log(1.5)));
 
+	public async void FirstWave()
+	{
+		while(true)
+		{
+			if (GetTree().GetNodesInGroup("enemy").Count > 0)
+			{
+				await Task.Delay(TimeSpan.FromSeconds(1));
+				continue;
+			} 
+			await NextWave();
+		}
+	}
+
 	public async Task NextWave()
 	{
 		soundEffectPlayer.Stream = ResourceLoader.Load<AudioStream>("res://assets/noise.wav");

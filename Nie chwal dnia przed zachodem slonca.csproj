@@ -67,7 +67,7 @@
     <Compile Include="scripts\BackgroundParallax.cs" />
     <Compile Include="scripts\MainMenu.cs" />
     <Compile Include="scripts\FpsCounter.cs" />
-    <Compile Include="scripts\GameManager.cs" /
+    <Compile Include="scripts\GameManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="scenes\levels\" />

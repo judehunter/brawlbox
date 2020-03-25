@@ -9,6 +9,7 @@
 extents = Vector2( 8, 13.2341 )
 
 [node name="Enemy Ranged" type="KinematicBody2D" groups=[
+"enemy",
 "knockback",
 "obstacle",
 ]]

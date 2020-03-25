@@ -25,6 +25,7 @@ tracks/0/keys = {
 }
 
 [node name="Enemy Melee" type="KinematicBody2D" groups=[
+"enemy",
 "knockback",
 "obstacle",
 ]]
