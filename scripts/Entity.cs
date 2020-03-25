@@ -53,11 +53,10 @@ public class Entity : KinematicBody2D
             var other = coll.Collider as Node2D;
             if (other.IsInGroup(group))
             {
-                GD.Print("found ", group);
+                lvlMgr.camera.Shake(5);
                 Vector2 dist = Position - other.Position;
                 Knockback(strength, dist);
                 if (other is Entity) (other as Entity).Knockback(strengthOther, -dist);
-                else GD.Print("not entity");
             }
         }
     }

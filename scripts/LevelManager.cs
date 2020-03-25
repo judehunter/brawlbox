@@ -7,9 +7,10 @@ public class LevelManager : Node2D
 	[Export] readonly float right;
 	[Export] readonly float top;
 	[Export] readonly float bottom;
+	[Export] public Vector2[] spawnPoints;
 
 	readonly Random rng = new Random();
-	[Export] public Vector2[] spawnPoints;
+	public Camera camera;
 
 	public void WrapAroundBoundary(Node2D node, float spawnOffset = 0)
 	{
@@ -23,6 +24,6 @@ public class LevelManager : Node2D
 
 	public override void _Ready()
 	{
-		
+		camera = GetNode<Camera>("Camera2D");
 	}
 }
