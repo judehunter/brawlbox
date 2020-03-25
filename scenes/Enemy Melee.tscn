@@ -23,4 +23,5 @@ maxSpeed = 700
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )

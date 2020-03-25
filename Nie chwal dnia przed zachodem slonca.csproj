@@ -62,6 +62,10 @@
     <Compile Include="scripts\MovingPlatform.cs" />
     <Compile Include="scripts\Player.cs" />
     <Compile Include="scripts\LevelManager.cs" />
+    <Compile Include="scripts\ProverbDisplay.cs" />
+    <Compile Include="scripts\BackgroundParallax.cs" />
+    <Compile Include="scripts\MainMenu.cs" />
+    <Compile Include="scripts\FpsCounter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="scenes\levels\" />
