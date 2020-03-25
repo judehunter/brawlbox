@@ -11,7 +11,7 @@ radius = 4.71381
 collision_layer = 2
 collision_mask = 3
 script = ExtResource( 3 )
-speed = 5.0
+speed = 3.0
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 2.32818, -1.04384 )

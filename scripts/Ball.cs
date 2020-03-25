@@ -3,19 +3,15 @@ using System;
 
 public class Ball : KinematicBody2D
 {
+	[Export] float speed;
 	public Vector2 dir;
 	public bool isPlayer;
-	[Export] float speed;
+	LevelManager lvlMgr;
 
-	// tilemap | enemies | p1 | p2
-	// 1 + 9 + 16 = 26
-	// 1 + 4 = 5
 	public override void _Ready()
 	{
-		//GD.Print(isPlayer);
-		//if (!isPlayer) SetCollisionMask(26);
-		//else SetCollisionMask(5);
 		Rotation = dir.Angle();
+		lvlMgr = GetTree().Root.GetNode<LevelManager>("Game/Level");
 	}
 	public override void _PhysicsProcess(float delta)
 	{
@@ -26,6 +22,7 @@ public class Ball : KinematicBody2D
 		{
 			GD.Print(collision.Collider);
 			if (collision.Collider is Entity e) e.Harm(500, e.Position - Position);
+			if (collision.Collider is Player) lvlMgr.camera.Shake(5);
 			QueueFree();
 		}
 
