@@ -12,8 +12,10 @@ layer = 5
 
 [node name="BlackOverlay" type="ColorRect" parent="CRTShader"]
 visible = false
-margin_right = 639.0
-margin_bottom = 367.0
+margin_left = -1.0
+margin_top = -2.0
+margin_right = 641.0
+margin_bottom = 363.0
 color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
