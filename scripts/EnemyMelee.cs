@@ -42,7 +42,7 @@ public class EnemyMelee : Enemy
 
 		velocity = MoveAndSlide(velocity, Vector2.Up);
 
-		sprite.Scale = new Vector2(spriteScaleX * (velocity.x > .1 ? 1 : -1), sprite.Scale.y);
+		sprite.Scale = new Vector2(spriteScaleX * (velocity.x < -.1 ? -1 : 1), sprite.Scale.y);
 
 		lvlMgr.WrapAroundBoundary(this);
 	}

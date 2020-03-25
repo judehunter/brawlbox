@@ -1,21 +1,20 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://tiles/maps/Poisonball_65x9.png" type="Texture" id=1]
+[ext_resource path="res://tiles/maps/Small_Iceball_9x24.png" type="Texture" id=1]
 [ext_resource path="res://anims/PoisonBalll.tres" type="Animation" id=2]
 [ext_resource path="res://scripts/Ball.cs" type="Script" id=3]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 3 )
-speed = 20.0
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 2.90809, 3.98723e-12 )
-rotation = 3.14159
+position = Vector2( 2.32818, -1.04384 )
+rotation = 4.71238
 scale = Vector2( 0.8, 0.799999 )
 texture = ExtResource( 1 )
 vframes = 6
 hframes = 10
-frame = 46
+frame = 7
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/anim = ExtResource( 2 )

@@ -21,7 +21,7 @@ public class EnemyRanged : Enemy
 	{
 		var attackPoint = GetNode<Node2D>("AttackPoint");
 		Vector2 dir = attackPoint.GlobalPosition.DirectionTo(nearest.GlobalPosition);
-		var ball = ((PackedScene)ResourceLoader.Load("res://scenes/PoisonBall.tscn")).Instance() as Ball;
+		var ball = ((PackedScene)ResourceLoader.Load("res://scenes/SmallIceBall.tscn")).Instance() as Ball;
 		ball.GlobalPosition = attackPoint.GlobalPosition;
 		ball.dir = dir;
 		GetTree().Root.AddChild(ball);
@@ -61,14 +61,13 @@ public class EnemyRanged : Enemy
 			sprite.Scale = new Vector2(spriteScaleX * (nearestDir.x > 0 ? 1 : -1), sprite.Scale.y);
 			if (Input.IsActionJustPressed("spacebar"))
 			{
-				GD.Print("attack");
 				Attack();
 			}
 		}
 		else
 		{
 			anim.CurrentAnimation = "walk";
-			sprite.Scale = new Vector2(spriteScaleX * (velocity.x > .1 ? 1 : -1), sprite.Scale.y);
+			sprite.Scale = new Vector2(spriteScaleX * (velocity.x < -.1 ? -1 : 1), sprite.Scale.y);
 		}
 
 		lvlMgr.WrapAroundBoundary(this, 32);

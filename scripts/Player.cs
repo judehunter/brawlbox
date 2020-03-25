@@ -4,8 +4,10 @@ using System;
 public class Player : Entity
 {
 	[Export] readonly float gravityFallStrength = 2;
+	[Export] readonly int attackCD;
 
 	bool isJump = false;
+	float nextAttackTime = 0;
 
 	void GetInput()
 	{
@@ -24,6 +26,20 @@ public class Player : Entity
 		{
 			isJump = false;
 		}
+	}
+
+	void Attack()
+	{
+		var OSTime = OS.GetTicksMsec();
+		if (OSTime < nextAttackTime) return;
+		if (!Input.IsActionJustPressed("attack")) return;
+		nextAttackTime =  + attackCD;
+		var attackPoint = GetNode<Node2D>("AttackPoint");
+		Vector2 dir = attackPoint.GlobalPosition.DirectionTo(GetViewport().GetMousePosition());
+		var ball = ((PackedScene)ResourceLoader.Load("res://scenes/PoisonBall.tscn")).Instance() as Ball;
+		ball.GlobalPosition = attackPoint.GlobalPosition;
+		ball.dir = dir;
+		GetTree().Root.AddChild(ball);
 	}
 
 	protected override void ApplyGravityForce()
@@ -46,9 +62,11 @@ public class Player : Entity
 		CheckKnockback("knockback", 500, 200);
 		ApplyKnockbackForce();
 		velocity = MoveAndSlide(velocity, Vector2.Up);
-
-		sprite.Scale = new Vector2(spriteScaleX * (velocity.x > .1 ? 1 : -1), sprite.Scale.y);
-
 		lvlMgr.WrapAroundBoundary(this);
+
+		anim.CurrentAnimation = velocity.x == 0 ? "idle" : "walk";
+		sprite.Scale = new Vector2(spriteScaleX * (velocity.x < -.1 ? -1 : 1), sprite.Scale.y);
+
+		Attack();
 	}
 }
