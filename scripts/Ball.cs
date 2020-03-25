@@ -23,6 +23,12 @@ public class Ball : KinematicBody2D
 			GD.Print(collision.Collider);
 			if (collision.Collider is Entity e) e.Harm(500, e.Position - Position);
 			if (collision.Collider is Player) lvlMgr.camera.Shake(5);
+
+			var parts = ((PackedScene)ResourceLoader.Load("res://scenes/ParticlesSmall.tscn")).Instance() as Particles2D;
+			parts.GlobalPosition = collision.Position;
+			parts.Emitting = true;
+
+			GetTree().Root.AddChild(parts);
 			QueueFree();
 		}
 
