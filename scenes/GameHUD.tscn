@@ -1,14 +1,15 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Pixeboy.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/hpbg.png" type="Texture" id=2]
 [ext_resource path="res://assets/gembg.png" type="Texture" id=3]
 [ext_resource path="res://assets/BigPixeboy.tres" type="DynamicFont" id=4]
+[ext_resource path="res://assets/numbers.wav" type="AudioStream" id=5]
 
 [sub_resource type="Animation" id=1]
 resource_name = "DropNumber"
 tracks/0/type = "bezier"
-tracks/0/path = NodePath("Label:rect_scale:x")
+tracks/0/path = NodePath("Countdown/Label:rect_scale:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -18,7 +19,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.3 )
 }
 tracks/1/type = "bezier"
-tracks/1/path = NodePath("Label:rect_scale:y")
+tracks/1/path = NodePath("Countdown/Label:rect_scale:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -28,9 +29,10 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.3 )
 }
 
-[node name="Control" type="Control"]
+[node name="HUD" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
@@ -164,3 +166,6 @@ __meta__ = {
 
 [node name="HUDAnimationPlayer" type="AnimationPlayer" parent="."]
 anims/DropNumber = SubResource( 1 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )

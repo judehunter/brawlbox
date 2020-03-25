@@ -6,6 +6,8 @@ public class Player : Entity
 	[Export] readonly float gravityFallStrength = 2;
 
 	bool isJump = false;
+	public int health = 100;
+	public int gems = 0;
 
 	void GetInput()
 	{

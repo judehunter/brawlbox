@@ -4,18 +4,20 @@ using System;
 public class MainMenu : MarginContainer
 {
 	AudioStreamPlayer select;
+	GameManager gm;
 	bool multiplayerVisible = false;
 
 	public override void _Ready()
 	{
 		GetNode<HBoxContainer>("VBoxContainer/UI/MarginContainer/Right/Multiplayer").Visible = multiplayerVisible;
 		select = GetNode<AudioStreamPlayer>("SelectSounds");
+		gm = GetTree().Root.GetNode<Node2D>("Game") as GameManager;
 	}
 
 	private void _on_Solo_pressed()
 	{
-		GD.Print("ee");
 		select.Play();
+		gm.StartSoloGame();
 	}
 
 	private void _on_Duo_pressed()

@@ -52,3 +52,6 @@ texture = ExtResource( 7 )
 visible = false
 scale = Vector2( 0.640001, 0.640001 )
 texture = ExtResource( 7 )
+
+[node name="MapSoundEffectPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -4.0

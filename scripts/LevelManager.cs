@@ -12,18 +12,20 @@ public class LevelManager : Node2D
 			(PackedScene)ResourceLoader.Load("res://scenes/EnemyMelee.tscn"),
 			(PackedScene)ResourceLoader.Load("res://scenes/EnemyRanged.tscn")
 		};
-		countdownLabel = GetTree().Root.GetNode<Label>("Game/HUD/Countdown/Label");
-		HUDAnimationPlayer = GetTree().Root.GetNode<AnimationPlayer>("Game/HUD/HUDAnimationPlayer");
-		waveDisplay = GetTree().Root.GetNode<VBoxContainer>("Game/HUD/MarginContainer/Elements/CenterContainer/NumberDisplay");
+		countdownLabel = GetTree().Root.GetNode<Label>("Game/UILayer/HUD/Countdown/Label");
+		HUDAnimationPlayer = GetTree().Root.GetNode<AnimationPlayer>("Game/UILayer/HUD/HUDAnimationPlayer");
+		waveDisplay = GetTree().Root.GetNode<VBoxContainer>("Game/UILayer/HUD/MarginContainer/Elements/CenterContainer/NumberDisplay");
+		soundEffectPlayer = GetNode<AudioStreamPlayer>("MapSoundEffectPlayer");
+		gm = GetTree().Root.GetNode<Node2D>("Game") as GameManager;
 	}
 	public override async void _Process(float delta)
 	{
-		if (curWave == -1 && Input.IsActionJustPressed("spacebar"))
-		{
-			// Hide label "Press space to start"
-			curWave = 0;
-			while(true) await NextWave();
-		}
+		//if (curWave == -1 && Input.IsActionJustPressed("spacebar"))
+		//{
+		//	// Hide label "Press space to start"
+		//	curWave = 0;
+		//	while(true) await NextWave();
+		//}
 	}
 
 	//Level boundaries and spawning
@@ -37,7 +39,10 @@ public class LevelManager : Node2D
 	protected Label countdownLabel;
 	protected AnimationPlayer HUDAnimationPlayer;
 	protected VBoxContainer waveDisplay;
+	protected AudioStreamPlayer soundEffectPlayer;
+	protected GameManager gm;
 	public Camera camera;
+
 
 	public void WrapAroundBoundary(Node2D node, float spawnOffset = 0)
 	{
@@ -51,7 +56,7 @@ public class LevelManager : Node2D
 
 	//Waves
 	[Export] readonly int difficulty = 3;
-	int curWave = -1;
+	int curWave = 0;
 	int waveTimer = 0;
 	PackedScene[] entityScenes;	
 
@@ -59,13 +64,14 @@ public class LevelManager : Node2D
 
 	public async Task NextWave()
 	{
-		
+		soundEffectPlayer.Stream = ResourceLoader.Load<AudioStream>("res://assets/noise.wav");
 		waveTimer = 3;
 		
 		while (waveTimer > 0)
 		{
 			countdownLabel.Text = waveTimer.ToString();
 			HUDAnimationPlayer.Play("DropNumber");
+			soundEffectPlayer.Play();
 			countdownLabel.Visible = true;
 			await Task.Delay(TimeSpan.FromSeconds(1));
 			waveTimer--;
@@ -75,6 +81,7 @@ public class LevelManager : Node2D
 		curWave++;
 		int enemyCount = GenEnemyCount();
 		GD.Print(curWave);
+		gm.StartLevelMusic();
 		waveDisplay.Visible = true;
 		
 		string curWaveText;

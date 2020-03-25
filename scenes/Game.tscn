@@ -1,15 +1,23 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://shaders/crt_material.tres" type="Material" id=1]
 [ext_resource path="res://scenes/MainMenu.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/levels/TestMap.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/GameHUD.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scripts/GameManager.cs" type="Script" id=5]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 5 )
 
 [node name="CRTShader" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="BlackOverlay" type="ColorRect" parent="CRTShader"]
+visible = false
+margin_right = 639.0
+margin_bottom = 367.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ColorRect" type="ColorRect" parent="CRTShader"]
 material = ExtResource( 1 )
@@ -21,10 +29,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Main Menu" parent="." instance=ExtResource( 2 )]
-visible = false
+[node name="MainMenu" parent="." instance=ExtResource( 2 )]
 
-[node name="Level" parent="." instance=ExtResource( 3 )]
+[node name="UILayer" type="CanvasLayer" parent="."]
 
-[node name="HUD" parent="." instance=ExtResource( 4 )]
-mouse_filter = 2
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="Tween" type="Tween" parent="."]
