@@ -61,6 +61,11 @@ public class Enemy : Entity
         velocity.y = -jumpStrength;
     }
 
+    protected override void Die()
+    {
+        QueueFree();
+    }
+
     public override void _Ready()
     {
         base._Ready();
@@ -70,6 +75,7 @@ public class Enemy : Entity
 
     public override void _PhysicsProcess(float delta)
     {
+        base._PhysicsProcess(delta);
         UpdateNearest();
     }
 

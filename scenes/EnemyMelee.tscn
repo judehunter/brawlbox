@@ -1,15 +1,34 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scripts/EnemyMelee.cs" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://tiles/maps/zombie.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 8 )
+extents = Vector2( 8, 11.2819 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "walk"
+length = 0.4
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.001, 0.002, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 0, 0, 1, 2, 3 ]
+}
 
 [node name="Enemy Melee" type="KinematicBody2D" groups=[
 "knockback",
 "obstacle",
 ]]
+collision_mask = 5
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
@@ -18,10 +37,21 @@ knockbackDamping = 1.3
 knockbackThreshold = 0.15
 moveSpeed = 100.0
 maxSpeed = 700
+maxHP = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -2.57025 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 0.25, 0.25 )
+position = Vector2( 0, -8.62853 )
+scale = Vector2( 1.4, 1.4 )
 texture = ExtResource( 2 )
+hframes = 4
+frame = 3
+region_enabled = true
+region_rect = Rect2( 0, 48, 64, 24 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "walk"
+anims/walk = SubResource( 2 )
