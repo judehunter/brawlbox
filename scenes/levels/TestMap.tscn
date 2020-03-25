@@ -17,7 +17,7 @@ right = 632.0
 top = -16.0
 bottom = 380.0
 spawnPoints = PoolVector2Array( -8, 88, 648, 104 )
-difficulty = 1
+difficulty = 2
 
 [node name="BG" parent="." instance=ExtResource( 1 )]
 collision_use_kinematic = false

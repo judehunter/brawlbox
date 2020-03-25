@@ -70,7 +70,7 @@ public class LevelManager : Node2D
 			{
 				await Task.Delay(TimeSpan.FromSeconds(1));
 				continue;
-			} 
+			}
 			await NextWave();
 		}
 	}

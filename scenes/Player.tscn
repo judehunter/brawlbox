@@ -21,6 +21,7 @@ gravityStrength = 1.1
 jumpStrength = 330.0
 moveSpeed = 150.0
 maxSpeed = 700
+maxHP = 20
 gravityFallStrength = 2.2
 attackCD = 300
 

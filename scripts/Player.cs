@@ -49,11 +49,26 @@ public class Player : Entity
 		if (velocity.y > maxSpeed) velocity.y = maxSpeed;
 	}
 
+	void BadassCrystalPowerMove()
+	{
+		if (!Input.IsActionJustPressed("crystal")) return;
+		foreach (var item in GetTree().GetNodesInGroup("enemy"))
+		{
+			(item as Enemy).Die();
+		}
+	}
+
 	public override void _Ready()
 	{
 		base._Ready();
 		attackPoint = GetNode<Node2D>("AttackPoint");
 		Enemy.AddPlayer(this);
+	}
+
+	public override void _Process(float delta)
+	{
+		base._Process(delta);
+		BadassCrystalPowerMove();
 	}
 
 	public override void _PhysicsProcess(float delta)
@@ -70,5 +85,11 @@ public class Player : Entity
 		sprite.Scale = new Vector2(spriteScaleX * (velocity.x < -.1 ? -1 : 1), sprite.Scale.y);
 
 		Attack();
+	}
+
+	public override void Die()
+	{
+		GD.Print("hp", HP);
+		//throw new NotImplementedException();
 	}
 }

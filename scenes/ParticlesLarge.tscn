@@ -49,7 +49,9 @@ hue_variation_random = 0.17
 [node name="explosion" type="Particles2D"]
 material = SubResource( 1 )
 position = Vector2( 330.537, 162.103 )
+emitting = false
 amount = 200
 lifetime = 0.3
+one_shot = true
 explosiveness = 0.59
 process_material = SubResource( 8 )
