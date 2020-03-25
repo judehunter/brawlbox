@@ -1,8 +1,21 @@
 using Godot;
 using System;
+using System.Collections;
+using System.Threading.Tasks;
 
 public class LevelManager : Node2D
 {
+	public override async void _Ready()
+	{
+		camera = GetNode<Camera>("Camera2D");
+		entityScenes = new PackedScene[] {
+			(PackedScene)ResourceLoader.Load("res://scenes/EnemyMelee.tscn"),
+			(PackedScene)ResourceLoader.Load("res://scenes/EnemyRanged.tscn")
+		};
+		await StartNextWave();
+	}
+
+	//Level boundaries and spawning
 	[Export] readonly float left;
 	[Export] readonly float right;
 	[Export] readonly float top;
@@ -22,8 +35,27 @@ public class LevelManager : Node2D
 
 	public Vector2 GetRandSpawnPoint() => spawnPoints[rng.Next(0, spawnPoints.Length)];
 
-	public override void _Ready()
+	//Waves
+	[Export] readonly float difficulty = 1;
+	int curWave = 0;
+	Type[] entityTypes = { typeof(EnemyMelee), typeof(EnemyRanged) };
+	PackedScene[] entityScenes;
+
+	int GenEnemyCount() => 5 * (int)Math.Ceiling((Math.Log(curWave + 1) / Math.Log(1.5)));
+
+	public async Task StartNextWave()
 	{
-		camera = GetNode<Camera>("Camera2D");
+		curWave++;
+		// Display count down here
+		// After count down
+
+		for (int i = 0; i < GenEnemyCount(); i++)
+		{
+			Node enemyNode = entityScenes[rng.Next(0, entityTypes.Length)].Instance();
+
+			AddChild(enemyNode);
+
+			await Task.Delay(TimeSpan.FromSeconds(2));
+		}
 	}
 }
