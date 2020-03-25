@@ -1,26 +1,24 @@
 using Godot;
 using System;
 
-public class Player : KinematicBody2D
+public class Player : Entity
 {
-	[Export] readonly float moveSpeed;
-	[Export] readonly float jumpStrength;
-	[Export] readonly float gravityStrength = 1;
 	[Export] readonly float gravityFallStrength = 2;
 
 	bool isJump = false;
-	Vector2 velocity;
 
 	void GetInput()
 	{
 		velocity.x = (Input.GetActionStrength("move_right") - Input.GetActionStrength("move_left")) * moveSpeed;
 		if (velocity.y == 0)
 		{
-			if (Input.IsActionPressed("move_up"))
+			if (IsOnFloor() && Input.IsActionPressed("move_up"))
 			{
 				isJump = true;
 				velocity.y = -1 * jumpStrength;
 			}
+
+			else isJump = false;
 		}
 		if (Input.IsActionJustReleased("move_up") || velocity.y > 0)
 		{
@@ -28,16 +26,26 @@ public class Player : KinematicBody2D
 		}
 	}
 
-	void ApplyGravity()
+	protected override void ApplyGravityForce()
 	{
 		velocity.y += 9.8f * (isJump ? gravityStrength : gravityFallStrength);
+		if (velocity.y > maxSpeed) velocity.y = maxSpeed;
 	}
-		
+
+	public override void _Ready()
+	{
+		base._Ready();
+		Enemy.AddPlayer(this);
+	}
 
 	public override void _PhysicsProcess(float delta)
 	{
 		GetInput();
-		ApplyGravity();
+		ApplyGravityForce();
+		CheckKnockback("knockback", 500, 200);
+		ApplyKnockbackForce();
 		velocity = MoveAndSlide(velocity, Vector2.Up);
+		
+		lvlMgr.WrapAroundBoundary(this);
 	}
 }
