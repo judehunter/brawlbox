@@ -8,6 +8,7 @@ extents = Vector2( 8, 8 )
 
 [node name="Enemy Melee" type="KinematicBody2D" groups=[
 "knockback",
+"obstacle",
 ]]
 script = ExtResource( 1 )
 __meta__ = {

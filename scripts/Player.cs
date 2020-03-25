@@ -3,8 +3,6 @@ using System;
 
 public class Player : Entity
 {
-	[Export] readonly float moveSpeed;
-	[Export] readonly float jumpStrength;
 	[Export] readonly float gravityFallStrength = 2;
 
 	bool isJump = false;

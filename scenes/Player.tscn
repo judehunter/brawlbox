@@ -11,11 +11,12 @@ extents = Vector2( 8, 8 )
 ]]
 scale = Vector2( 1.73909, 1.73909 )
 script = ExtResource( 2 )
-gravityStrength = 1.2
 knockbackThreshold = 0.1
+maxKnockback = 200.0
+gravityStrength = 1.1
+jumpStrength = 330.0
+moveSpeed = 150.0
 maxSpeed = 700
-moveSpeed = 120.0
-jumpStrength = 300.0
 gravityFallStrength = 2.2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

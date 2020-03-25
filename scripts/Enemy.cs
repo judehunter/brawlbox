@@ -34,7 +34,7 @@ public class Enemy : Entity
         var result = spaceState.IntersectRay(Position, Position + new Vector2(dirH * 1000000, 0), new Godot.Collections.Array { this });
         if (result.Count <= 0) return;
 
-        if (!(result["collider"] as Node).IsInGroup("obstacles")) return;
+        if (!(result["collider"] as Node).IsInGroup("obstacle")) return;
 
         Vector2 pos = result["position"] as Vector2? ?? Vector2.Zero;
         GetNode<Node2D>("../Gizmo").Position = pos;

@@ -3,7 +3,6 @@ using System;
 
 public class EnemyMelee : Enemy
 {
-	[Export] readonly float moveSpeed = 50;
 	[Export] readonly int reactionTime = 300;
 
 	int dirH = 0;
