@@ -30,6 +30,7 @@ tile_data = PoolIntArray( -65538, 11, 65546, -65537, 11, 65546, -131072, 11, 655
 position = Vector2( 212.951, 50.7457 )
 scale = Vector2( 1, 1 )
 maxKnockback = 500.0
+maxHP = 10
 
 [node name="Blue Moving Platform" parent="." instance=ExtResource( 4 )]
 position = Vector2( 357.775, 120.017 )

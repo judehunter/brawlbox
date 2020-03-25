@@ -114,6 +114,18 @@ public class LevelManager : Node2D
 				curWaveText = curWave + "th";
 				break;
 		}
+		switch(curWave)
+		{
+			case 11:
+				curWaveText = "11th";
+				break;
+			case 12:
+				curWaveText = "12th";
+				break;
+			case 13:
+				curWaveText = "13th";
+				break;
+		}
 
 		waveDisplay.GetChild<Label>(0).Text = curWaveText;
 

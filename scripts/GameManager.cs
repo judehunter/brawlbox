@@ -55,6 +55,7 @@ public class GameManager : Node2D
 
 	public void StartLevelMusic()
 	{
+		if (music.Playing) return;
 		music.Stream = ResourceLoader.Load<AudioStream>("res://assets/rivals-warmup.ogg");
 		music.Play();
 		music.Connect("finished", this, nameof(musicWarmupFinished));
