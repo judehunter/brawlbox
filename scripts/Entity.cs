@@ -15,9 +15,17 @@ public class Entity : KinematicBody2D
 
     protected LevelManager lvlMgr;
 
+    protected Node2D sprite;
+    protected float spriteScaleX;
+
+    protected AnimationPlayer anim;
+
     public override void _Ready()
     {
-        lvlMgr = GetTree().Root.GetNode<LevelManager>("Level");
+        sprite = GetNode<Sprite>("Sprite");
+        anim = GetNode<AnimationPlayer>("AnimationPlayer");
+        spriteScaleX = sprite.Scale.x;
+        lvlMgr = GetTree().Root.GetNode<LevelManager>("Game/Level");
     }
 
     public void Knockback(float strength, Vector2 dist)

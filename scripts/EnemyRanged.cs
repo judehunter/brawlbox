@@ -44,6 +44,17 @@ public class EnemyRanged : Enemy
 
 		velocity = MoveAndSlide(velocity, Vector2.Up);
 
+		if (dirH == 0)
+		{
+			anim.CurrentAnimation = "idle";
+			sprite.Scale = new Vector2(spriteScaleX * (nearestDir.x > 0 ? 1 : -1), sprite.Scale.y);
+		}
+		else
+		{
+			anim.CurrentAnimation = "walk";
+			sprite.Scale = new Vector2(spriteScaleX * (velocity.x > .1 ? 1 : -1), sprite.Scale.y);
+		}
+
 		lvlMgr.WrapAroundBoundary(this, 32);
 	}
 }
