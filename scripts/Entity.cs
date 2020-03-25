@@ -17,7 +17,7 @@ public class Entity : KinematicBody2D
 
     public override void _Ready()
     {
-        lvlMgr = GetTree().Root.GetNode<LevelManager>("Level");
+        lvlMgr = GetTree().Root.GetNode<LevelManager>("Game/Level");
     }
 
     public void Knockback(float strength, Vector2 dist)

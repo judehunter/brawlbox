@@ -64,7 +64,7 @@ public class Enemy : Entity
     public override void _Ready()
     {
         base._Ready();
-        lvlMgr = GetTree().Root.GetNode<LevelManager>("Level");
+        lvlMgr = GetTree().Root.GetNode<LevelManager>("Game/Level");
         Position = lvlMgr.GetRandSpawnPoint();
     }
 
