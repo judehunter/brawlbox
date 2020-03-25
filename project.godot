@@ -16,8 +16,8 @@ _global_script_class_icons={
 [application]
 
 config/name="Nie chwal dnia przed zachodem slonca"
-run/main_scene="res://scenes/Menus/MainMenu.tscn"
-boot_splash/image="res://splash.png"
+run/main_scene="res://scenes/CRT Shader Wrapper.tscn"
+boot_splash/image="res://assets/splash.png"
 boot_splash/bg_color=Color( 1, 1, 1, 1 )
 config/icon="res://icon.png"
 
@@ -68,4 +68,6 @@ move_up={
 [rendering]
 
 quality/2d/use_pixel_snap=true
+environment/default_clear_color=Color( 0.0431373, 0.101961, 0.254902, 1 )
+quality/depth/hdr=false
 environment/default_environment="res://default_env.tres"
