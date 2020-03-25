@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://shaders/crt_material.tres" type="Material" id=1]
-[ext_resource path="res://scenes/Main Menu.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/MainMenu.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/levels/TestMap.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/GameHUD.tscn" type="PackedScene" id=4]
 
