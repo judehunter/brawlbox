@@ -5,14 +5,22 @@ using System.Threading.Tasks;
 
 public class LevelManager : Node2D
 {
-	public override async void _Ready()
+	public override void _Ready()
 	{
 		camera = GetNode<Camera>("Camera2D");
 		entityScenes = new PackedScene[] {
 			(PackedScene)ResourceLoader.Load("res://scenes/EnemyMelee.tscn"),
 			(PackedScene)ResourceLoader.Load("res://scenes/EnemyRanged.tscn")
 		};
-		await StartNextWave();
+	}
+	public override async void _Process(float delta)
+	{
+		if (curWave == -1 && Input.IsActionJustPressed("spacebar"))
+		{
+			// Hide label "Press space to start"
+			curWave = 0;
+			while(true) await NextWave();
+		}
 	}
 
 	//Level boundaries and spawning
@@ -36,24 +44,31 @@ public class LevelManager : Node2D
 	public Vector2 GetRandSpawnPoint() => spawnPoints[rng.Next(0, spawnPoints.Length)];
 
 	//Waves
-	[Export] readonly float difficulty = 1;
-	int curWave = 0;
-	Type[] entityTypes = { typeof(EnemyMelee), typeof(EnemyRanged) };
-	PackedScene[] entityScenes;
+	[Export] readonly int difficulty = 3;
+	int curWave = -1;
+	int waveTimer = 0;
+	PackedScene[] entityScenes;	
 
-	int GenEnemyCount() => 5 * (int)Math.Ceiling((Math.Log(curWave + 1) / Math.Log(1.5)));
+	int GenEnemyCount() => difficulty * (int)Math.Ceiling((Math.Log(curWave + 1) / Math.Log(1.5)));
 
-	public async Task StartNextWave()
+	public async Task NextWave()
 	{
-		curWave++;
-		// Display count down here
-		// After count down
-
-		for (int i = 0; i < GenEnemyCount(); i++)
+		waveTimer = 3;
+		while (waveTimer > 0)
 		{
-			Node enemyNode = entityScenes[rng.Next(0, entityTypes.Length)].Instance();
+			// Set timer label
+			await Task.Delay(TimeSpan.FromSeconds(1));
+			waveTimer--;
+		}
 
+		curWave++;
+		int enemyCount = GenEnemyCount();
+		for (int i = 0; i < enemyCount; i++)
+		{
+			Node enemyNode = entityScenes[rng.Next(0, entityScenes.Length)].Instance();
 			AddChild(enemyNode);
+
+			int remaining = enemyCount - 1;
 
 			await Task.Delay(TimeSpan.FromSeconds(2));
 		}
