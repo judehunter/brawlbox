@@ -44,6 +44,6 @@ public class EnemyRanged : Enemy
 
 		velocity = MoveAndSlide(velocity, Vector2.Up);
 
-		lvlMgr.WrapAroundBoundary(this, 16);
+		lvlMgr.WrapAroundBoundary(this, 32);
 	}
 }

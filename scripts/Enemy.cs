@@ -65,6 +65,7 @@ public class Enemy : Entity
     {
         base._Ready();
         lvlMgr = GetTree().Root.GetNode<LevelManager>("Level");
+        Position = lvlMgr.GetRandSpawnPoint();
     }
 
     public override void _PhysicsProcess(float delta)
