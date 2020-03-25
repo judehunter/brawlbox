@@ -59,6 +59,7 @@
     <Compile Include="scripts\EnemyMelee.cs" />
     <Compile Include="scripts\EnemyRanged.cs" />
     <Compile Include="scripts\Entity.cs" />
+    <Compile Include="scripts\GameManager.cs" />
     <Compile Include="scripts\MovingPlatform.cs" />
     <Compile Include="scripts\Player.cs" />
     <Compile Include="scripts\LevelManager.cs" />

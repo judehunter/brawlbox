@@ -1,12 +1,38 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Pixeboy.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/hpbg.png" type="Texture" id=2]
 [ext_resource path="res://assets/gembg.png" type="Texture" id=3]
+[ext_resource path="res://assets/BigPixeboy.tres" type="DynamicFont" id=4]
+
+[sub_resource type="Animation" id=1]
+resource_name = "DropNumber"
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Label:rect_scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 3, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.3 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Label:rect_scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 3, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.3 )
+}
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -17,7 +43,7 @@ margin_bottom = 57.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/margin_right = 20
-custom_constants/margin_top = 0
+custom_constants/margin_top = 10
 custom_constants/margin_left = 20
 custom_constants/margin_bottom = 5
 __meta__ = {
@@ -26,8 +52,9 @@ __meta__ = {
 
 [node name="Elements" type="HBoxContainer" parent="MarginContainer"]
 margin_left = 20.0
+margin_top = 10.0
 margin_right = 620.0
-margin_bottom = 60.0
+margin_bottom = 70.0
 
 [node name="HP" type="TextureRect" parent="MarginContainer/Elements"]
 margin_right = 110.0
@@ -50,19 +77,49 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Right" type="HBoxContainer" parent="MarginContainer/Elements"]
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/Elements"]
 margin_left = 114.0
-margin_right = 600.0
+margin_right = 486.0
 margin_bottom = 60.0
 size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="NumberDisplay" type="VBoxContainer" parent="MarginContainer/Elements/CenterContainer"]
+visible = false
+margin_left = 142.0
+margin_top = 1.0
+margin_right = 229.0
+margin_bottom = 59.0
+alignment = 1
+
+[node name="WaveNumber" type="Label" parent="MarginContainer/Elements/CenterContainer/NumberDisplay"]
+margin_right = 87.0
+margin_bottom = 36.0
+custom_fonts/font = ExtResource( 4 )
+text = "1st"
+align = 1
+valign = 1
+
+[node name="Label" type="Label" parent="MarginContainer/Elements/CenterContainer/NumberDisplay"]
+margin_top = 40.0
+margin_right = 87.0
+margin_bottom = 58.0
+custom_fonts/font = ExtResource( 1 )
+text = "WAVE"
+align = 1
+valign = 1
+
+[node name="Right" type="HBoxContainer" parent="MarginContainer/Elements"]
+margin_left = 490.0
+margin_right = 600.0
+margin_bottom = 60.0
 alignment = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Gems" type="TextureRect" parent="MarginContainer/Elements/Right"]
-margin_left = 376.0
-margin_right = 486.0
+margin_right = 110.0
 margin_bottom = 60.0
 texture = ExtResource( 3 )
 flip_h = true
@@ -79,3 +136,31 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Countdown" type="CenterContainer" parent="."]
+margin_top = -0.698334
+margin_right = 640.0
+margin_bottom = 361.302
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Countdown"]
+visible = false
+margin_left = 305.0
+margin_top = 163.0
+margin_right = 334.0
+margin_bottom = 199.0
+rect_pivot_offset = Vector2( 14.364, 16 )
+custom_fonts/font = ExtResource( 4 )
+text = "3"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HUDAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/DropNumber = SubResource( 1 )

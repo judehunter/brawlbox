@@ -12,6 +12,9 @@ public class LevelManager : Node2D
 			(PackedScene)ResourceLoader.Load("res://scenes/EnemyMelee.tscn"),
 			(PackedScene)ResourceLoader.Load("res://scenes/EnemyRanged.tscn")
 		};
+		countdownLabel = GetTree().Root.GetNode<Label>("Game/HUD/Countdown/Label");
+		HUDAnimationPlayer = GetTree().Root.GetNode<AnimationPlayer>("Game/HUD/HUDAnimationPlayer");
+		waveDisplay = GetTree().Root.GetNode<VBoxContainer>("Game/HUD/MarginContainer/Elements/CenterContainer/NumberDisplay");
 	}
 	public override async void _Process(float delta)
 	{
@@ -31,6 +34,9 @@ public class LevelManager : Node2D
 	[Export] public Vector2[] spawnPoints;
 
 	readonly Random rng = new Random();
+	protected Label countdownLabel;
+	protected AnimationPlayer HUDAnimationPlayer;
+	protected VBoxContainer waveDisplay;
 	public Camera camera;
 
 	public void WrapAroundBoundary(Node2D node, float spawnOffset = 0)
@@ -53,16 +59,44 @@ public class LevelManager : Node2D
 
 	public async Task NextWave()
 	{
+		
 		waveTimer = 3;
+		
 		while (waveTimer > 0)
 		{
-			// Set timer label
+			countdownLabel.Text = waveTimer.ToString();
+			HUDAnimationPlayer.Play("DropNumber");
+			countdownLabel.Visible = true;
 			await Task.Delay(TimeSpan.FromSeconds(1));
 			waveTimer--;
 		}
+		countdownLabel.Visible = false;
 
 		curWave++;
 		int enemyCount = GenEnemyCount();
+		GD.Print(curWave);
+		waveDisplay.Visible = true;
+		
+		string curWaveText;
+		int lastDigit = curWave % 10;
+		switch (lastDigit)
+		{
+			case 1:
+				curWaveText = curWave + "st";
+				break;
+			case 2:
+				curWaveText = curWave + "nd";
+				break;
+			case 3:
+				curWaveText = curWave + "rd";
+				break;
+			default:
+				curWaveText = curWave + "th";
+				break;
+		}
+
+		waveDisplay.GetChild<Label>(0).Text = curWaveText;
+
 		for (int i = 0; i < enemyCount; i++)
 		{
 			Node enemyNode = entityScenes[rng.Next(0, entityScenes.Length)].Instance();
