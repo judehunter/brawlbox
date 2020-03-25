@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://tiles/maps/Small_Iceball_9x24.png" type="Texture" id=1]
+[ext_resource path="res://anims/PoisonBalll.tres" type="Animation" id=2]
+[ext_resource path="res://scripts/Ball.cs" type="Script" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 4.71381
+
+[node name="Node2D" type="KinematicBody2D"]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource( 3 )
+speed = 3.0
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 2.32818, -1.04384 )
+rotation = -1.57081
+scale = Vector2( 0.8, 0.799999 )
+texture = ExtResource( 1 )
+vframes = 6
+hframes = 10
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "anim"
+anims/anim = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 6.5862, 0 )
+shape = SubResource( 1 )
