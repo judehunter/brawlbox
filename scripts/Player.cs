@@ -9,6 +9,25 @@ public class Player : Entity
 	bool isJump = false;
 	int nextAttackTime = 0;
 	Node2D attackPoint;
+	GameManager gm;
+	Label healthDisplay;
+
+	protected override void Die()
+	{
+		gm.PlayerDied();
+		GD.Print("Player died!");
+		Hide();
+	}
+
+	public override void Harm(float strength, Vector2 dist)
+	{
+		HP--;
+		Die();
+		if (HP <= 0) Die();
+		knockback += strength * dist.Normalized() * new Vector2(1, .03f);
+		healthDisplay.Text = (HP*10).ToString();
+		//if (knockback.Length() > maxKnockback) knockback = knockback.Normalized() * maxKnockback;
+	}
 
 	void GetInput()
 	{
@@ -54,6 +73,9 @@ public class Player : Entity
 		base._Ready();
 		attackPoint = GetNode<Node2D>("AttackPoint");
 		Enemy.AddPlayer(this);
+		gm = GetTree().Root.GetNode<Node2D>("Game") as GameManager;
+		healthDisplay = GetTree().Root.GetNode<Label>("Game/UILayer/HUD/MarginContainer/Elements/HP/Label");
+		healthDisplay.Text = (HP*10).ToString();
 	}
 
 	public override void _PhysicsProcess(float delta)

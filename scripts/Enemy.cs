@@ -63,6 +63,7 @@ public class Enemy : Entity
 
     protected override void Die()
     {
+        lvlMgr.enemiesKilled++;
         QueueFree();
     }
 

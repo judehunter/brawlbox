@@ -42,6 +42,7 @@ public class LevelManager : Node2D
 	protected AudioStreamPlayer soundEffectPlayer;
 	protected GameManager gm;
 	public Camera camera;
+	public int enemiesKilled = 0;
 
 
 	public void WrapAroundBoundary(Node2D node, float spawnOffset = 0)
@@ -56,7 +57,7 @@ public class LevelManager : Node2D
 
 	//Waves
 	[Export] readonly int difficulty = 3;
-	int curWave = 0;
+	public int curWave = 0;
 	int waveTimer = 0;
 	PackedScene[] entityScenes;	
 
@@ -64,7 +65,7 @@ public class LevelManager : Node2D
 
 	public async void FirstWave()
 	{
-		while(true)
+		while(true && gm.state != GameManager.GAME_STATE.DEATH_SCREEN)
 		{
 			if (GetTree().GetNodesInGroup("enemy").Count > 0)
 			{
@@ -72,6 +73,14 @@ public class LevelManager : Node2D
 				continue;
 			} 
 			await NextWave();
+		}
+	}
+
+	public void KillAllEnemies()
+	{
+		foreach(var item in GetTree().GetNodesInGroup("enemy"))
+		{
+			(item as Enemy).QueueFree();
 		}
 	}
 

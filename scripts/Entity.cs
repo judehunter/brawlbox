@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class Entity : KinematicBody2D
+public abstract class Entity : KinematicBody2D
 {
     [Export] protected readonly float knockbackDamping = 1.2f;
     [Export] protected readonly float knockbackThreshold = .2f;
@@ -13,7 +13,7 @@ public class Entity : KinematicBody2D
     [Export] protected readonly int maxHP;
     protected Vector2 velocity;
     protected Vector2 knockback;
-    protected int HP;
+    public int HP;
 
     protected LevelManager lvlMgr;
 
@@ -31,12 +31,9 @@ public class Entity : KinematicBody2D
         lvlMgr = GetTree().Root.GetNode<LevelManager>("Game/Level");
     }
 
-    protected virtual void Die()
-    {
-        //QueueFree();
-    }
+    protected abstract void Die();
 
-    public void Harm(float strength, Vector2 dist)
+    public virtual void Harm(float strength, Vector2 dist)
     {
         HP--;
         if (HP <= 0) Die();

@@ -13,6 +13,7 @@ wet = 0.29
 
 [sub_resource type="AudioEffectHighPassFilter" id=3]
 resource_name = "HighPassFilter"
+cutoff_hz = 1000.0
 
 [resource]
 bus/0/effect/0/effect = SubResource( 1 )
