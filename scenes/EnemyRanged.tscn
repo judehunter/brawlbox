@@ -41,5 +41,5 @@ autoplay = "walk"
 anims/idle = ExtResource( 4 )
 anims/walk = ExtResource( 3 )
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="AttackPoint" type="Node2D" parent="."]
 position = Vector2( 4.9687, -3.49649 )

@@ -9,11 +9,22 @@ public class EnemyRanged : Enemy
 	readonly Random rng = new Random();
 	int playerDist;
 	int dirH = 0;
+	float time = 0;
 
 	public override void _Ready()
 	{
 		base._Ready();
 		playerDist = rng.Next(minPlayerDist, maxPlayerDist);
+	}
+
+	void Attack()
+	{
+		var attackPoint = GetNode<Node2D>("AttackPoint");
+		Vector2 dir = attackPoint.GlobalPosition.DirectionTo(nearest.GlobalPosition);
+		var ball = ((PackedScene)ResourceLoader.Load("res://scenes/PoisonBall.tscn")).Instance() as Ball;
+		ball.GlobalPosition = attackPoint.GlobalPosition;
+		ball.dir = dir;
+		GetTree().Root.AddChild(ball);
 	}
 
 	public override void _PhysicsProcess(float delta)
@@ -48,6 +59,11 @@ public class EnemyRanged : Enemy
 		{
 			anim.CurrentAnimation = "idle";
 			sprite.Scale = new Vector2(spriteScaleX * (nearestDir.x > 0 ? 1 : -1), sprite.Scale.y);
+			if (Input.IsActionJustPressed("spacebar"))
+			{
+				GD.Print("attack");
+				Attack();
+			}
 		}
 		else
 		{
