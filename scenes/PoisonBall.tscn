@@ -1,10 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://tiles/maps/Poisonball_65x9.png" type="Texture" id=1]
 [ext_resource path="res://anims/PoisonBalll.tres" type="Animation" id=2]
 [ext_resource path="res://scripts/Ball.cs" type="Script" id=3]
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 7.61488, 5.07616 )
+
+[node name="Node2D" type="KinematicBody2D"]
+collision_layer = 4
+collision_mask = 5
 script = ExtResource( 3 )
 speed = 20.0
 
@@ -15,7 +20,11 @@ scale = Vector2( 0.8, 0.799999 )
 texture = ExtResource( 1 )
 vframes = 6
 hframes = 10
-frame = 46
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "anim"
 anims/anim = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 21.0121, 0.677811 )
+shape = SubResource( 1 )

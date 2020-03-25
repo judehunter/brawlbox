@@ -12,6 +12,8 @@ extents = Vector2( 8, 13.2341 )
 "knockback",
 "obstacle",
 ]]
+collision_layer = 0
+collision_mask = 5
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
@@ -19,8 +21,10 @@ __meta__ = {
 maxKnockback = 300.0
 moveSpeed = 100.0
 maxSpeed = 700
-minPlayerDist = 100
-maxPlayerDist = 300
+maxHP = 3
+minPlayerDist = 75
+maxPlayerDist = 125
+attackCD = 1500
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -3.3819 )
@@ -42,4 +46,4 @@ anims/idle = ExtResource( 4 )
 anims/walk = ExtResource( 3 )
 
 [node name="AttackPoint" type="Node2D" parent="."]
-position = Vector2( 4.9687, -3.49649 )
+position = Vector2( 0, -2.83524 )

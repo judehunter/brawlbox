@@ -10,8 +10,10 @@ public class Entity : KinematicBody2D
     [Export] protected readonly float jumpStrength = 300;
     [Export] protected readonly float moveSpeed;
     [Export] protected readonly int maxSpeed;
+    [Export] protected readonly int maxHP;
     protected Vector2 velocity;
     protected Vector2 knockback;
+    protected int HP;
 
     protected LevelManager lvlMgr;
 
@@ -22,16 +24,24 @@ public class Entity : KinematicBody2D
 
     public override void _Ready()
     {
+        HP = maxHP;
         sprite = GetNode<Sprite>("Sprite");
         anim = GetNode<AnimationPlayer>("AnimationPlayer");
         spriteScaleX = sprite.Scale.x;
         lvlMgr = GetTree().Root.GetNode<LevelManager>("Game/Level");
     }
 
-    public void Knockback(float strength, Vector2 dist)
+    protected virtual void Die()
     {
+        //QueueFree();
+    }
+
+    public void Harm(float strength, Vector2 dist)
+    {
+        HP--;
+        if (HP <= 0) Die();
         knockback += strength * dist.Normalized() * new Vector2(1, .03f);
-        if (knockback.Length() > maxKnockback) knockback = knockback.Normalized() * maxKnockback;
+        //if (knockback.Length() > maxKnockback) knockback = knockback.Normalized() * maxKnockback;
     }
 
     protected virtual void ApplyGravityForce()
@@ -63,8 +73,8 @@ public class Entity : KinematicBody2D
             {
                 lvlMgr.camera.Shake(5);
                 Vector2 dist = Position - other.Position;
-                Knockback(strength, dist);
-                if (other is Entity) (other as Entity).Knockback(strengthOther, -dist);
+                Harm(strength, dist);
+                if (other is Entity) (other as Entity).Harm(strengthOther, -dist);
             }
         }
     }

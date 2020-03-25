@@ -7,7 +7,8 @@ public class Player : Entity
 	[Export] readonly int attackCD;
 
 	bool isJump = false;
-	float nextAttackTime = 0;
+	int nextAttackTime = 0;
+	Node2D attackPoint;
 
 	void GetInput()
 	{
@@ -33,12 +34,12 @@ public class Player : Entity
 		var OSTime = OS.GetTicksMsec();
 		if (OSTime < nextAttackTime) return;
 		if (!Input.IsActionJustPressed("attack")) return;
-		nextAttackTime =  + attackCD;
-		var attackPoint = GetNode<Node2D>("AttackPoint");
+		nextAttackTime = (int)OSTime + attackCD;
 		Vector2 dir = attackPoint.GlobalPosition.DirectionTo(GetViewport().GetMousePosition());
 		var ball = ((PackedScene)ResourceLoader.Load("res://scenes/PoisonBall.tscn")).Instance() as Ball;
 		ball.GlobalPosition = attackPoint.GlobalPosition;
 		ball.dir = dir;
+		ball.isPlayer = true;
 		GetTree().Root.AddChild(ball);
 	}
 
@@ -51,6 +52,7 @@ public class Player : Entity
 	public override void _Ready()
 	{
 		base._Ready();
+		attackPoint = GetNode<Node2D>("AttackPoint");
 		Enemy.AddPlayer(this);
 	}
 

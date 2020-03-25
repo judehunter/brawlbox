@@ -61,6 +61,11 @@ public class Enemy : Entity
         velocity.y = -jumpStrength;
     }
 
+    protected override void Die()
+    {
+        QueueFree();
+    }
+
     public override void _Ready()
     {
         base._Ready();

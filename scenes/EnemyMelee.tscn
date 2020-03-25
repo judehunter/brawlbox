@@ -28,6 +28,7 @@ tracks/0/keys = {
 "knockback",
 "obstacle",
 ]]
+collision_mask = 5
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
@@ -36,6 +37,7 @@ knockbackDamping = 1.3
 knockbackThreshold = 0.15
 moveSpeed = 100.0
 maxSpeed = 700
+maxHP = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -2.57025 )
