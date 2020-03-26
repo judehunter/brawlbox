@@ -36,5 +36,6 @@ __meta__ = {
 [node name="UILayer" type="CanvasLayer" parent="."]
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -3.636
 
 [node name="Tween" type="Tween" parent="."]

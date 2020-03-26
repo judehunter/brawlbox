@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Tools</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{09FAB2CB-E787-4410-AF82-73296FB7D87A}</ProjectGuid>
+    <ProjectGuid>{6AD940CF-D4B7-485A-9C10-152C4D41797F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <OutputPath>.mono\temp\bin\$(Configuration)</OutputPath>
-    <RootNamespace>Niechwaldniaprzedzachodemslonca</RootNamespace>
-    <AssemblyName>Nie chwal dnia przed zachodem slonca</AssemblyName>
+    <RootNamespace>BRAWLBOX</RootNamespace>
+    <AssemblyName>BRAWLBOX</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <GodotProjectGeneratorVersion>1.0.7374.16792</GodotProjectGeneratorVersion>
     <BaseIntermediateOutputPath>.mono\temp\obj</BaseIntermediateOutputPath>

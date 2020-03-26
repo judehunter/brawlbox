@@ -84,6 +84,7 @@ public class Player : Entity
 			lvlMgr.camera.Shake(25);
 		}
 		lvlMgr.gems = g - 1;
+		lvlMgr.gemDisplay.Text = lvlMgr.gems.ToString();
 	}
 
 	public override void _Ready()

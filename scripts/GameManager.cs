@@ -27,7 +27,7 @@ public class GameManager : Node2D
 		LevelManager lv = GetNode<LevelManager>("Level");
 		HUD.GetNode<MarginContainer>("MarginContainer").Visible = false;
 		HUD.GetNode<Control>("DeathScreen").Visible = true;
-		string statsText = "Waves survived: " + lv.curWave + "\nCrystals Collected: 0" + "\nEnemies killed: " + lv.enemiesKilled;
+		string statsText = "Waves survived: " + lv.curWave + "\nCrystals Collected: " + lv.gems + "\nEnemies killed: " + lv.enemiesKilled;
 		HUD.GetNode<Label>("DeathScreen/Center/VBoxContainer/Stats").Text = statsText;
 		GetNode<LevelManager>("Level").KillAllEnemies();
 	}

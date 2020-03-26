@@ -15,7 +15,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Nie chwal dnia przed zachodem slonca"
+config/name="BRAWLBOX"
 run/main_scene="res://scenes/Game.tscn"
 boot_splash/image="res://assets/splash.png"
 boot_splash/bg_color=Color( 1, 1, 1, 1 )
