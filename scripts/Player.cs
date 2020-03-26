@@ -11,16 +11,19 @@ public class Player : Entity
 	Node2D attackPoint;
 	GameManager gm;
 	Label healthDisplay;
+	public bool alive = true;
 
 	protected override void Die()
 	{
 		gm.PlayerDied();
+		alive = false;
 		GD.Print("Player died!");
-		Hide();
+		/*Hide();*/
 	}
 
 	public override void Harm(float strength, Vector2 dist)
 	{
+		if (!alive) return;
 		HP--;
 		Die();
 		if (HP <= 0) Die();

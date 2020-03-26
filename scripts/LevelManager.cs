@@ -17,6 +17,7 @@ public class LevelManager : Node2D
 		waveDisplay = GetTree().Root.GetNode<VBoxContainer>("Game/UILayer/HUD/MarginContainer/Elements/CenterContainer/NumberDisplay");
 		soundEffectPlayer = GetNode<AudioStreamPlayer>("MapSoundEffectPlayer");
 		gm = GetTree().Root.GetNode<Node2D>("Game") as GameManager;
+		player = GetNode<KinematicBody2D>("Player") as Player;
 	}
 	public override async void _Process(float delta)
 	{
@@ -41,6 +42,8 @@ public class LevelManager : Node2D
 	protected VBoxContainer waveDisplay;
 	protected AudioStreamPlayer soundEffectPlayer;
 	protected GameManager gm;
+	protected Player player;
+	public bool WaveInProgress = false;
 	public Camera camera;
 	public int enemiesKilled = 0;
 
@@ -63,22 +66,14 @@ public class LevelManager : Node2D
 
 	int GenEnemyCount() => difficulty * (int)Math.Ceiling((Math.Log(curWave + 1) / Math.Log(1.5)));
 
-	public async void FirstWave()
+	public void FirstWave()
 	{
-		while(true && gm.state != GameManager.GAME_STATE.DEATH_SCREEN)
-		{
-			if (GetTree().GetNodesInGroup("enemy").Count > 0)
-			{
-				await Task.Delay(TimeSpan.FromSeconds(1));
-				continue;
-			} 
-			await NextWave();
-		}
+		NextWave();
 	}
 
 	public void KillAllEnemies()
 	{
-		foreach(var item in GetTree().GetNodesInGroup("enemy"))
+		foreach (var item in GetTree().GetNodesInGroup("enemy"))
 		{
 			(item as Enemy).QueueFree();
 		}
@@ -86,6 +81,8 @@ public class LevelManager : Node2D
 
 	public async Task NextWave()
 	{
+		if (!player.alive) return;
+
 		soundEffectPlayer.Stream = ResourceLoader.Load<AudioStream>("res://assets/noise.wav");
 		waveTimer = 3;
 		
@@ -140,12 +137,21 @@ public class LevelManager : Node2D
 
 		for (int i = 0; i < enemyCount; i++)
 		{
-			Node enemyNode = entityScenes[rng.Next(0, entityScenes.Length)].Instance();
-			AddChild(enemyNode);
+			if(player.alive)
+			{
+				Node enemyNode = entityScenes[rng.Next(0, entityScenes.Length)].Instance();
+				AddChild(enemyNode);
 
-			int remaining = enemyCount - 1;
+				int remaining = enemyCount - 1;
 
-			await Task.Delay(TimeSpan.FromSeconds(2));
+				await Task.Delay(TimeSpan.FromSeconds(2));
+			}
 		}
+		
+		while (GetTree().GetNodesInGroup("enemy").Count != 0)
+		{
+				await Task.Delay(TimeSpan.FromSeconds(1));
+		}
+		_ = NextWave();
 	}
 }
