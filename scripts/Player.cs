@@ -11,6 +11,7 @@ public class Player : Entity
 	Node2D attackPoint;
 	GameManager gm;
 	Label healthDisplay;
+	Label gemDisplay;
 	public bool alive = true;
 
 	public override void Die()
@@ -86,6 +87,7 @@ public class Player : Entity
 		Enemy.AddPlayer(this);
 		gm = GetTree().Root.GetNode<Node2D>("Game") as GameManager;
 		healthDisplay = GetTree().Root.GetNode<Label>("Game/UILayer/HUD/MarginContainer/Elements/HP/Label");
+		gemDisplay = GetTree().Root.GetNode<Label>("Game/UILayer/HUD/MarginContainer/Elements/Right/Gems/Label");
 		healthDisplay.Text = (HP*10).ToString();
 	}
 
