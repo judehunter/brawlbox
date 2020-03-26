@@ -61,8 +61,14 @@ public class Enemy : Entity
         velocity.y = -jumpStrength;
     }
 
-    protected override void Die()
+    public override void Die()
     {
+        var parts = ((PackedScene)ResourceLoader.Load("res://scenes/ParticlesLarge.tscn")).Instance() as Particles2D;
+        parts.GlobalPosition = GlobalPosition;
+        parts.Emitting = true;
+
+        GetTree().Root.GetNode("Game").AddChild(parts);
+
         lvlMgr.enemiesKilled++;
         QueueFree();
     }

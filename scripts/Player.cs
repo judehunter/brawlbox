@@ -71,6 +71,15 @@ public class Player : Entity
 		if (velocity.y > maxSpeed) velocity.y = maxSpeed;
 	}
 
+	void BadassCrystalPowerMove()
+	{
+		if (!Input.IsActionJustPressed("crystal")) return;
+		foreach (var item in GetTree().GetNodesInGroup("enemy"))
+		{
+			(item as Enemy).Die();
+		}
+	}
+
 	public override void _Ready()
 	{
 		base._Ready();
@@ -79,6 +88,12 @@ public class Player : Entity
 		gm = GetTree().Root.GetNode<Node2D>("Game") as GameManager;
 		healthDisplay = GetTree().Root.GetNode<Label>("Game/UILayer/HUD/MarginContainer/Elements/HP/Label");
 		healthDisplay.Text = (HP*10).ToString();
+	}
+
+	public override void _Process(float delta)
+	{
+		base._Process(delta);
+		BadassCrystalPowerMove();
 	}
 
 	public override void _PhysicsProcess(float delta)
@@ -95,5 +110,11 @@ public class Player : Entity
 		sprite.Scale = new Vector2(spriteScaleX * (velocity.x < -.1 ? -1 : 1), sprite.Scale.y);
 
 		Attack();
+	}
+
+	public override void Die()
+	{
+		GD.Print("hp", HP);
+		//throw new NotImplementedException();
 	}
 }
