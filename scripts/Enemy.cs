@@ -61,7 +61,7 @@ public class Enemy : Entity
 		velocity.y = -jumpStrength;
 	}
 
-	public override void Die()
+	public override void Die(bool wasByGem)
 	{
 		var parts = ((PackedScene)ResourceLoader.Load("res://scenes/ParticlesLarge.tscn")).Instance() as Particles2D;
 		parts.GlobalPosition = GlobalPosition;
@@ -69,7 +69,13 @@ public class Enemy : Entity
 
 		GetTree().Root.GetNode("Game").AddChild(parts);
 
+		GD.Print(wasByGem);
 		lvlMgr.enemiesKilled++;
+		if (!wasByGem) lvlMgr.enemiesKilledWithoutGem++;
+		if (lvlMgr.enemiesKilledWithoutGem % 15 == 0) {
+			lvlMgr.gems++;
+			lvlMgr.gemDisplay.Text = lvlMgr.gems.ToString();
+		};
 		QueueFree();
 	}
 

@@ -11,10 +11,10 @@ public class Player : Entity
 	Node2D attackPoint;
 	GameManager gm;
 	Label healthDisplay;
-	Label gemDisplay;
 	public bool alive = true;
+	
 
-	public override void Die()
+	public override void Die(bool _)
 	{
 		gm.PlayerDied();
 		alive = false;
@@ -26,7 +26,7 @@ public class Player : Entity
 	{
 		if (!alive) return;
 		HP--;
-		if (HP <= 0) Die();
+		if (HP <= 0) Die(false);
 		knockback += strength * dist.Normalized() * new Vector2(1, .03f);
 		healthDisplay.Text = (HP*10).ToString();
 		//if (knockback.Length() > maxKnockback) knockback = knockback.Normalized() * maxKnockback;
@@ -74,10 +74,16 @@ public class Player : Entity
 	void BadassCrystalPowerMove()
 	{
 		if (!Input.IsActionJustPressed("crystal")) return;
+		if (lvlMgr.gems <= 0) return;
+		var g = lvlMgr.gems;
+		lvlMgr.gems--;
+		lvlMgr.gemDisplay.Text = lvlMgr.gems.ToString();
 		foreach (var item in GetTree().GetNodesInGroup("enemy"))
 		{
-			(item as Enemy).Die();
+			(item as Enemy).Die(true);
+			lvlMgr.camera.Shake(25);
 		}
+		lvlMgr.gems = g - 1;
 	}
 
 	public override void _Ready()
@@ -87,7 +93,6 @@ public class Player : Entity
 		Enemy.AddPlayer(this);
 		gm = GetTree().Root.GetNode<Node2D>("Game") as GameManager;
 		healthDisplay = GetTree().Root.GetNode<Label>("Game/UILayer/HUD/MarginContainer/Elements/HP/Label");
-		gemDisplay = GetTree().Root.GetNode<Label>("Game/UILayer/HUD/MarginContainer/Elements/Right/Gems/Label");
 		healthDisplay.Text = (HP*10).ToString();
 	}
 
