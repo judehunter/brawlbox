@@ -31,7 +31,7 @@ public abstract class Entity : KinematicBody2D
         lvlMgr = GetTree().Root.GetNode<LevelManager>("Game/Level");
     }
 
-    protected abstract void Die();
+    public abstract void Die();
 
     public virtual void Harm(float strength, Vector2 dist)
     {

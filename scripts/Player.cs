@@ -13,7 +13,7 @@ public class Player : Entity
 	Label healthDisplay;
 	public bool alive = true;
 
-	protected override void Die()
+	public override void Die()
 	{
 		gm.PlayerDied();
 		alive = false;
@@ -25,7 +25,6 @@ public class Player : Entity
 	{
 		if (!alive) return;
 		HP--;
-		Die();
 		if (HP <= 0) Die();
 		knockback += strength * dist.Normalized() * new Vector2(1, .03f);
 		healthDisplay.Text = (HP*10).ToString();
@@ -112,9 +111,4 @@ public class Player : Entity
 		Attack();
 	}
 
-	public override void Die()
-	{
-		GD.Print("hp", HP);
-		//throw new NotImplementedException();
-	}
 }
