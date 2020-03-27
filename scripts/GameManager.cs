@@ -35,6 +35,7 @@ public class GameManager : Node2D
 	public void RestartGame()
 	{
 		PackedScene Level = ResourceLoader.Load<PackedScene>("res://scenes/levels/TestMap.tscn");
+		Enemy.players.Clear();
 		RemoveChild(GetNode<Node2D>("Level"));
 		AddChild(Level.Instance());
 		music.Bus = "Master";

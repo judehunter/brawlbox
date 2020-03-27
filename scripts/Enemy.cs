@@ -5,7 +5,7 @@ using System.Linq;
 
 public class Enemy : Entity
 {
-	static readonly List<Player> players = new List<Player>();
+	public static readonly List<Player> players = new List<Player>();
 
 	protected Player nearest;
 
