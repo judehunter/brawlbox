@@ -58,6 +58,12 @@ public class GameManager : Node2D
 			if (state == GAME_STATE.INGAME_ALIVE || state == GAME_STATE.DEATH_SCREEN) GoToMenu();
 			if (state == GAME_STATE.MENU) GetTree().Quit();
 		}
+
+		if(Input.IsActionJustPressed("toggle_fullscreen"))
+		{
+			OS.WindowFullscreen ^= true;
+			OS.WindowBorderless ^= true;
+		}
 	}
 
 	public async void GoToMenu()
