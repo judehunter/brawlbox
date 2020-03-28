@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/TileMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/EnemyDamage.wav" type="AudioStream" id=3]
 [ext_resource path="res://scenes/BlueMovingPlatform.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scripts/Camera.cs" type="Script" id=5]
 [ext_resource path="res://icon.png" type="Texture" id=7]
@@ -31,6 +32,7 @@ position = Vector2( 212.951, 50.7457 )
 scale = Vector2( 1, 1 )
 maxKnockback = 500.0
 maxHP = 10
+attackCD = 250
 
 [node name="Blue Moving Platform" parent="." instance=ExtResource( 4 )]
 position = Vector2( 357.775, 120.017 )
@@ -55,5 +57,9 @@ visible = false
 scale = Vector2( 0.640001, 0.640001 )
 texture = ExtResource( 7 )
 
-[node name="MapSoundEffectPlayer" type="AudioStreamPlayer" parent="."]
+[node name="EnemyDamage" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
 volume_db = -4.0
+
+[node name="MapSoundEffectPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -2.0

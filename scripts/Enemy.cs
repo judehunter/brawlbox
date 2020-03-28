@@ -8,6 +8,7 @@ public class Enemy : Entity
 	public static readonly List<Player> players = new List<Player>();
 
 	protected Player nearest;
+	AudioStreamPlayer enemyDamagePlayer;
 
 	protected void UpdateNearest()
 	{
@@ -68,7 +69,7 @@ public class Enemy : Entity
 		parts.Emitting = true;
 
 		GetTree().Root.GetNode("Game").AddChild(parts);
-
+		if (!enemyDamagePlayer.Playing) enemyDamagePlayer.Play();
 		GD.Print(wasByGem);
 		lvlMgr.enemiesKilled++;
 		if (!wasByGem) lvlMgr.enemiesKilledWithoutGem++;
@@ -84,6 +85,7 @@ public class Enemy : Entity
 		base._Ready();
 		lvlMgr = GetTree().Root.GetNode<LevelManager>("Game/Level");
 		Position = lvlMgr.GetRandSpawnPoint();
+		enemyDamagePlayer = GetTree().Root.GetNode<AudioStreamPlayer>("Game/Level/EnemyDamage");
 	}
 
 	public override void _PhysicsProcess(float delta)

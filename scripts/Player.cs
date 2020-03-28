@@ -11,6 +11,9 @@ public class Player : Entity
 	Node2D attackPoint;
 	GameManager gm;
 	Label healthDisplay;
+	AudioStreamPlayer damageSound;
+	AudioStreamPlayer mapSoundEffects;
+	AudioStreamPlayer shootSound;
 	public bool alive = true;
 	
 
@@ -26,6 +29,7 @@ public class Player : Entity
 	{
 		if (!alive) return;
 		HP--;
+		if(!damageSound.Playing) damageSound.Play();
 		if (HP <= 0) Die(false);
 		knockback += strength * dist.Normalized() * new Vector2(1, .03f);
 		healthDisplay.Text = (HP*10).ToString();
@@ -63,6 +67,7 @@ public class Player : Entity
 		ball.dir = dir;
 		ball.isPlayer = true;
 		GetTree().Root.AddChild(ball);
+		shootSound.Play();
 	}
 
 	protected override void ApplyGravityForce()
@@ -85,6 +90,8 @@ public class Player : Entity
 		}
 		lvlMgr.gems = g - 1;
 		lvlMgr.gemDisplay.Text = lvlMgr.gems.ToString();
+		mapSoundEffects.Stream = ResourceLoader.Load<AudioStream>("res://assets/crystal.wav");
+		mapSoundEffects.Play();
 	}
 
 	public override void _Ready()
@@ -95,6 +102,9 @@ public class Player : Entity
 		gm = GetTree().Root.GetNode<Node2D>("Game") as GameManager;
 		healthDisplay = GetTree().Root.GetNode<Label>("Game/UILayer/HUD/MarginContainer/Elements/HP/Label");
 		healthDisplay.Text = (HP*10).ToString();
+		damageSound = GetNode<AudioStreamPlayer>("DamageSound");
+		shootSound = GetNode<AudioStreamPlayer>("ShootSound");
+		mapSoundEffects = GetTree().Root.GetNode<AudioStreamPlayer>("Game/Level/MapSoundEffectPlayer");
 	}
 
 	public override void _Process(float delta)
