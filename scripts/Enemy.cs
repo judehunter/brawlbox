@@ -5,9 +5,10 @@ using System.Linq;
 
 public class Enemy : Entity
 {
-	static readonly List<Player> players = new List<Player>();
+	public static readonly List<Player> players = new List<Player>();
 
 	protected Player nearest;
+	AudioStreamPlayer enemyDamagePlayer;
 
 	protected void UpdateNearest()
 	{
@@ -61,15 +62,21 @@ public class Enemy : Entity
 		velocity.y = -jumpStrength;
 	}
 
-	public override void Die()
+	public override void Die(bool wasByGem)
 	{
 		var parts = ((PackedScene)ResourceLoader.Load("res://scenes/ParticlesLarge.tscn")).Instance() as Particles2D;
 		parts.GlobalPosition = GlobalPosition;
 		parts.Emitting = true;
 
 		GetTree().Root.GetNode("Game").AddChild(parts);
-
+		if (!enemyDamagePlayer.Playing) enemyDamagePlayer.Play();
+		GD.Print(wasByGem);
 		lvlMgr.enemiesKilled++;
+		if (!wasByGem) lvlMgr.enemiesKilledWithoutGem++;
+		if (lvlMgr.enemiesKilledWithoutGem % 15 == 0) {
+			lvlMgr.gems++;
+			lvlMgr.gemDisplay.Text = lvlMgr.gems.ToString();
+		};
 		QueueFree();
 	}
 
@@ -78,6 +85,7 @@ public class Enemy : Entity
 		base._Ready();
 		lvlMgr = GetTree().Root.GetNode<LevelManager>("Game/Level");
 		Position = lvlMgr.GetRandSpawnPoint();
+		enemyDamagePlayer = GetTree().Root.GetNode<AudioStreamPlayer>("Game/Level/EnemyDamage");
 	}
 
 	public override void _PhysicsProcess(float delta)

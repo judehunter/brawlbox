@@ -18,6 +18,8 @@ public class LevelManager : Node2D
 		soundEffectPlayer = GetNode<AudioStreamPlayer>("MapSoundEffectPlayer");
 		gm = GetTree().Root.GetNode<Node2D>("Game") as GameManager;
 		player = GetNode<KinematicBody2D>("Player") as Player;
+		gemDisplay = GetTree().Root.GetNode<Label>("Game/UILayer/HUD/MarginContainer/Elements/Right/Gems/Label");
+		gemDisplay.Text = "0";
 	}
 	public override async void _Process(float delta)
 	{
@@ -46,6 +48,9 @@ public class LevelManager : Node2D
 	public bool WaveInProgress = false;
 	public Camera camera;
 	public int enemiesKilled = 0;
+	public int enemiesKilledWithoutGem = 0;
+	public int gems = 0;
+	public Label gemDisplay;
 
 
 	public void WrapAroundBoundary(Node2D node, float spawnOffset = 0)

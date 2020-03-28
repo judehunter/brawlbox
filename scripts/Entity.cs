@@ -31,12 +31,12 @@ public abstract class Entity : KinematicBody2D
         lvlMgr = GetTree().Root.GetNode<LevelManager>("Game/Level");
     }
 
-    public abstract void Die();
+    public abstract void Die(bool byGem);
 
     public virtual void Harm(float strength, Vector2 dist)
     {
         HP--;
-        if (HP <= 0) Die();
+        if (HP <= 0) Die(false);
         knockback += strength * dist.Normalized() * new Vector2(1, .03f);
         //if (knockback.Length() > maxKnockback) knockback = knockback.Normalized() * maxKnockback;
     }
