@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://shaders/crt_material.tres" type="Material" id=1]
+[ext_resource path="res://scenes/MainMenu.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scripts/GameManager.cs" type="Script" id=5]
+
+[node name="Game" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="CRTShader" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="BlackOverlay" type="ColorRect" parent="CRTShader"]
+visible = false
+margin_left = -1.0
+margin_top = -2.0
+margin_right = 641.0
+margin_bottom = 363.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="CRTShader"]
+material = ExtResource( 1 )
+margin_right = 40.0
+margin_bottom = 40.0
+rect_scale = Vector2( 16.0058, 9.01066 )
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainMenu" parent="." instance=ExtResource( 2 )]
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -3.636
+
+[node name="Tween" type="Tween" parent="."]

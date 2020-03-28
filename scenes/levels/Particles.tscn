@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/ParticlesSmall.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/ParticlesLarge.tscn" type="PackedScene" id=2]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -70.294
+margin_top = -99.4537
+margin_right = -0.294006
+margin_bottom = 309.546
+rect_scale = Vector2( 12.2774, 1.33779 )
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="explosion" parent="." instance=ExtResource( 2 )]
+
+[node name="Particles2D" parent="." instance=ExtResource( 1 )]

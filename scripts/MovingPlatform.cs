@@ -27,5 +27,6 @@ public class MovingPlatform : KinematicBody2D
 	{
 		Move();
 		MoveAndSlide(velocity, Vector2.Up);
+		Position = new Vector2(Position.x, pointA.y);
 	}
 }

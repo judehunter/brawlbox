@@ -1,0 +1,254 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Pixeboy.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/hpbg.png" type="Texture" id=2]
+[ext_resource path="res://assets/gembg.png" type="Texture" id=3]
+[ext_resource path="res://assets/BigPixeboy.tres" type="DynamicFont" id=4]
+[ext_resource path="res://assets/numbers.wav" type="AudioStream" id=5]
+
+[sub_resource type="Animation" id=1]
+resource_name = "DropNumber"
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Countdown/Label:rect_scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 3, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.3 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Countdown/Label:rect_scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 3, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.3 )
+}
+
+[node name="HUD" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_right = 640.0
+margin_bottom = 362.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 20
+custom_constants/margin_top = 10
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Elements" type="HBoxContainer" parent="MarginContainer"]
+margin_left = 20.0
+margin_top = 10.0
+margin_right = 620.0
+margin_bottom = 357.0
+
+[node name="HP" type="TextureRect" parent="MarginContainer/Elements"]
+margin_right = 110.0
+margin_bottom = 347.0
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="MarginContainer/Elements/HP"]
+margin_left = 36.244
+margin_top = 13.7846
+margin_right = 110.244
+margin_bottom = 46.7846
+custom_fonts/font = ExtResource( 1 )
+text = "100"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/Elements"]
+margin_left = 114.0
+margin_right = 486.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="NumberDisplay" type="VBoxContainer" parent="MarginContainer/Elements/CenterContainer"]
+visible = false
+margin_left = 142.0
+margin_top = -29.0
+margin_right = 229.0
+margin_bottom = 29.0
+alignment = 1
+
+[node name="WaveNumber" type="Label" parent="MarginContainer/Elements/CenterContainer/NumberDisplay"]
+margin_right = 87.0
+margin_bottom = 36.0
+custom_fonts/font = ExtResource( 4 )
+text = "1st"
+align = 1
+valign = 1
+
+[node name="Label" type="Label" parent="MarginContainer/Elements/CenterContainer/NumberDisplay"]
+margin_top = 40.0
+margin_right = 87.0
+margin_bottom = 58.0
+custom_fonts/font = ExtResource( 1 )
+text = "WAVE"
+align = 1
+valign = 1
+
+[node name="Right" type="HBoxContainer" parent="MarginContainer/Elements"]
+margin_left = 490.0
+margin_right = 600.0
+margin_bottom = 347.0
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Gems" type="TextureRect" parent="MarginContainer/Elements/Right"]
+margin_right = 110.0
+margin_bottom = 347.0
+texture = ExtResource( 3 )
+flip_h = true
+
+[node name="Label" type="Label" parent="MarginContainer/Elements/Right/Gems"]
+margin_left = -0.225983
+margin_top = 13.6415
+margin_right = 68.774
+margin_bottom = 46.6415
+custom_fonts/font = ExtResource( 1 )
+text = "3"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Countdown" type="CenterContainer" parent="."]
+margin_left = 1.3967
+margin_top = -0.698334
+margin_right = 641.397
+margin_bottom = 361.302
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Countdown"]
+visible = false
+margin_left = 305.0
+margin_top = 163.0
+margin_right = 334.0
+margin_bottom = 199.0
+rect_pivot_offset = Vector2( 14.364, 16 )
+custom_fonts/font = ExtResource( 4 )
+text = "3"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DeathScreen" type="Control" parent="."]
+visible = false
+margin_left = 20.0
+margin_top = 10.0
+margin_right = 620.0
+margin_bottom = 357.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Center" type="CenterContainer" parent="DeathScreen"]
+margin_top = -0.698334
+margin_right = 600.0
+margin_bottom = 346.302
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="DeathScreen/Center"]
+margin_left = 155.0
+margin_top = 58.0
+margin_right = 445.0
+margin_bottom = 288.0
+rect_min_size = Vector2( 290, 230 )
+color = Color( 0, 0, 0, 0.87451 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DeathScreen/Center"]
+margin_left = 96.0
+margin_top = 68.0
+margin_right = 503.0
+margin_bottom = 279.0
+
+[node name="Title" type="Label" parent="DeathScreen/Center/VBoxContainer"]
+margin_right = 407.0
+margin_bottom = 75.0
+custom_fonts/font = ExtResource( 4 )
+text = "There is a worth
+ in every death"
+align = 1
+valign = 1
+
+[node name="HSeparator" type="HSeparator" parent="DeathScreen/Center/VBoxContainer"]
+margin_top = 79.0
+margin_right = 407.0
+margin_bottom = 83.0
+
+[node name="Stats" type="Label" parent="DeathScreen/Center/VBoxContainer"]
+margin_top = 87.0
+margin_right = 407.0
+margin_bottom = 147.0
+custom_fonts/font = ExtResource( 1 )
+text = "Waves survived: 11
+Gems collected: 6
+Enemies killed: 145"
+align = 1
+valign = 1
+
+[node name="Proverb" type="Label" parent="DeathScreen/Center/VBoxContainer"]
+margin_top = 151.0
+margin_right = 407.0
+margin_bottom = 211.0
+custom_fonts/font = ExtResource( 1 )
+text = "
+
+third time's a charm"
+align = 1
+valign = 1
+
+[node name="Hint" type="Label" parent="DeathScreen"]
+margin_left = 220.078
+margin_top = 335.682
+margin_right = 532.078
+margin_bottom = 353.682
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = ExtResource( 1 )
+text = "(PRESS SPACE TO TRY AGAIN)"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HUDAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/DropNumber = SubResource( 1 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
